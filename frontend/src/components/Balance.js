@@ -1,10 +1,15 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { expenseContaxt } from "../context/expense-contaxt";
 function Balance() {
+  const { transactions } = useContext(expenseContaxt);
+
+  const total = transactions.reduce((currentVal, transaction) => {
+    return currentVal + +transaction.amount;
+  }, 0);
   return (
     <>
       <h4>Your Balance</h4>
-      <h1>$0.00</h1>
+      <h1>${total}</h1>
     </>
   );
 }
