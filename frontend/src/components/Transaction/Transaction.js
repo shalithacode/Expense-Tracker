@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { expenseContaxt } from "../../context/expense-contaxt";
 
 function Transaction(props) {
+  const ctx = useContext(expenseContaxt);
+
+  const handleDeleteTransaction = () => {
+    ctx.deleteTransaction(props.transaction.id);
+  };
+
   return (
     <li className={props.transaction.amount > 0 ? "plus" : "minus"}>
       {props.transaction.text}{" "}
@@ -8,7 +15,9 @@ function Transaction(props) {
         {props.transaction.amount > 0 ? "+" : "-"}$
         {Math.abs(props.transaction.amount)}
       </span>
-      <button className="delete-btn">x</button>
+      <button className="delete-btn" onClick={handleDeleteTransaction}>
+        x
+      </button>
     </li>
   );
 }

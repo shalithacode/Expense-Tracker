@@ -1,10 +1,21 @@
-import React, { useState } from "react";
-
+import React, { useState, useContext } from "react";
+import { expenseContaxt } from "../context/expense-contaxt";
 function AddTransaction() {
   const [text, setText] = useState("");
   const [amount, setAmount] = useState(0);
 
-  const onSubmitHandler = () => {};
+  const ctx = useContext(expenseContaxt);
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    ctx.addTransaction({
+      id: Math.random(),
+      text,
+      amount: +amount,
+    });
+    setText("");
+    setAmount(0);
+  };
   return (
     <div>
       <h3>Add new transaction</h3>
